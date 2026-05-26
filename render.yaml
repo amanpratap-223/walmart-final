@@ -3,6 +3,7 @@ services:
   - type: web
     name: walmart-main
     env: node
+    plan: free
     buildCommand: "cd frontend && npm install && npm run build && cd ../backend && npm install"
     startCommand: "cd backend && node server.js"
     envVars:
@@ -19,6 +20,7 @@ services:
   - type: web
     name: walmart-ai-recommender
     env: python
+    plan: free
     buildCommand: "cd ai-recommender && pip install -r requirements.txt"
     startCommand: "cd ai-recommender && gunicorn ai_recommender:app"
     envVars:
@@ -32,6 +34,7 @@ services:
   - type: web
     name: walmart-ai-search
     env: python
+    plan: free
     buildCommand: "cd ai-search-engine-flask && pip install -r requirements.txt"
     startCommand: "cd ai-search-engine-flask && gunicorn app:app"
     envVars:
