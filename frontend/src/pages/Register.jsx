@@ -213,6 +213,7 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -233,14 +234,14 @@ const Register = () => {
       if (res.ok) {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
-        alert("Registration successful!");
+        toast.success("Account created! Welcome to Walmart 🎉");
         navigate("/");
       } else {
-        alert(data.message || "Registration failed.");
+        toast.error(data.message || "Registration failed.");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong during registration.");
+      toast.error("Something went wrong during registration.");
     }
   };
 

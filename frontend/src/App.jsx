@@ -94,6 +94,8 @@ import UserManagement      from './components/Admin/UserManagement';
 import ProductManagement   from './components/Admin/ProductManagement';
 import OrderManagement     from './components/Admin/OrderManagement';
 import WishlistPage        from './pages/WishlistPage';
+import DealStrip           from './components/Layout/DealStrip';
+import Footer              from './components/Layout/Footer';
 
 export default function App() {
   return (
@@ -137,8 +139,10 @@ function PublicLayout() {
   return (
     <>
       <Mainnavbar />
+      <DealStrip />
       <Chatbot />
       <Outlet />
+      <Footer />
     </>
   );
 }

@@ -1,8 +1,7 @@
 
-
-
 import React from "react";
 import Hero from "../components/Layout/Hero";
+import TrustStrip from "../components/Layout/TrustStrip";
 import Electronics from "../components/Products/Electronics";
 import MenOnly from "../components/Products/MenOnly";
 import WomenOnly from "../components/Products/WomenOnly";
@@ -13,6 +12,7 @@ import FoodItems from "../components/Products/FoodItems";
 const Home = () => (
   <div>
     <Hero />
+    <TrustStrip />
     <Electronics />
     <MenOnly />
     <WomenOnly />
@@ -23,4 +23,3 @@ const Home = () => (
 );
 
 export default Home;
-

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,18 +21,18 @@ const Login = () => {
       if (res.ok) {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("token", data.token);
-        alert("Login successful!");
+        toast.success(`Welcome back, ${data.user.name}! 👋`);
         if (data.user.role === "admin") {
           navigate("/admin");
         } else {
           navigate("/");
         }
       } else {
-        alert(data.message || "Invalid credentials.");
+        toast.error(data.message || "Invalid credentials.");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong during login.");
+      toast.error("Something went wrong during login.");
     }
   };
 
