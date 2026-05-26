@@ -204,9 +204,11 @@ export default function MainNavbar() {
 
             {/* desktop icons */}
             <div className="hidden md:flex items-center space-x-6">
-              <Link to="/admin" className="px-2 py-1 bg-black text-white rounded text-sm font-semibold">
-                Admin
-              </Link>
+              {user?.role === 'admin' && (
+                <Link to="/admin" className="px-2 py-1 bg-black text-white rounded text-sm font-semibold">
+                  Admin
+                </Link>
+              )}
               <button onClick={() => setIsSearchOpen(true)}>
                 <HiMagnifyingGlass size={24} className="text-gray-800" />
               </button>
@@ -255,9 +257,11 @@ export default function MainNavbar() {
                 </Link>
               ))}
               <div className="flex space-x-6 pt-4 border-t">
-                <Link to="/admin" className="px-2 py-1 bg-black text-white rounded text-sm font-semibold flex items-center justify-center" onClick={() => setMobileMenuOpen(false)}>
-                  Admin
-                </Link>
+                {user?.role === 'admin' && (
+                  <Link to="/admin" className="px-2 py-1 bg-black text-white rounded text-sm font-semibold flex items-center justify-center" onClick={() => setMobileMenuOpen(false)}>
+                    Admin
+                  </Link>
+                )}
                 <button onClick={() => setIsSearchOpen(true)}>
                   <HiMagnifyingGlass size={24} className="text-gray-800" />
                 </button>

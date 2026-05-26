@@ -71,7 +71,7 @@
 // }
 
 import React from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import { CartProvider }     from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { Toaster }          from 'react-hot-toast';
@@ -117,12 +117,14 @@ export default function App() {
               <Route path="/wishlist"               element={<WishlistPage />} />
             </Route>
 
-            {/* Admin */}
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index     element={<AdminHomePage />} />
-              <Route path="users"    element={<UserManagement />} />
-              <Route path="products" element={<ProductManagement />} />
-              <Route path="orders"   element={<OrderManagement />} />
+            {/* Admin - protected */}
+            <Route path="/admin" element={<AdminGuard />}>
+              <Route element={<AdminLayout />}>
+                <Route index     element={<AdminHomePage />} />
+                <Route path="users"    element={<UserManagement />} />
+                <Route path="products" element={<ProductManagement />} />
+                <Route path="orders"   element={<OrderManagement />} />
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>
@@ -139,4 +141,11 @@ function PublicLayout() {
       <Outlet />
     </>
   );
+}
+
+function AdminGuard() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (!user) return <Navigate to="/login" replace />;
+  if (user.role !== 'admin') return <Navigate to="/" replace />;
+  return <Outlet />;
 }
