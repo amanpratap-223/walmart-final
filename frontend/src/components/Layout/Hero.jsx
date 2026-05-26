@@ -7,30 +7,27 @@ const slides = [
     subtitle: "Up to 60% off on Electronics",
     cta: "Shop Electronics",
     link: "/category/electronics",
-    bg: "from-blue-900 via-blue-900/50 to-transparent",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1920&q=80",
+    gradient: "from-indigo-900 via-indigo-900/80 to-indigo-900/20",
+    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&h=700&fit=crop&crop=top&q=80",
     badge: "Limited Time",
-    position: "center 25%",
   },
   {
     title: "New Fashion Arrivals",
     subtitle: "Discover the latest trends for Men & Women",
     cta: "Shop Fashion",
     link: "/category/women",
-    bg: "from-pink-900 via-pink-900/50 to-transparent",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1920&q=80",
+    gradient: "from-rose-900 via-rose-900/80 to-rose-900/20",
+    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1400&h=700&fit=crop&crop=top&q=80",
     badge: "New In",
-    position: "center 30%",
   },
   {
-    title: "Home & Furniture",
-    subtitle: "Transform your living space for less",
-    cta: "Shop Furniture",
-    link: "/category/furniture",
-    bg: "from-orange-900 via-orange-900/50 to-transparent",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1920&q=80",
-    badge: "Save Big",
-    position: "center 20%",
+    title: "Trending Now",
+    subtitle: "Shop what everyone is talking about",
+    cta: "Shop Trending",
+    link: "/category/trending",
+    gradient: "from-violet-900 via-violet-900/80 to-violet-900/20",
+    image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=1400&h=700&fit=crop&crop=top&q=80",
+    badge: "Hot 🔥",
   },
 ];
 
@@ -46,6 +43,7 @@ const Hero = () => {
   }, [current]);
 
   const goTo = (index) => {
+    if (animating) return;
     setAnimating(true);
     setTimeout(() => {
       setCurrent(index);
@@ -57,32 +55,30 @@ const Hero = () => {
 
   return (
     <div className="relative w-full overflow-hidden" style={{ height: '520px' }}>
-      {/* Background image */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-500 ${animating ? 'opacity-0' : 'opacity-100'}`}
-        style={{
-          backgroundImage: `url(${slide.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: slide.position || 'center',
-        }}
+      {/* Background image using img tag for proper fitting */}
+      <img
+        src={slide.image}
+        alt={slide.title}
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${animating ? 'opacity-0' : 'opacity-100'}`}
       />
-      {/* Gradient overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${slide.bg}`} />
+
+      {/* Gradient overlay — solid left, fading right so model shows on right side */}
+      <div className={`absolute inset-0 bg-gradient-to-r ${slide.gradient}`} />
 
       {/* Content */}
-      <div className={`relative z-10 h-full flex flex-col justify-center px-10 md:px-24 transition-all duration-500 ${animating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
-        <span className="inline-block bg-white text-blue-900 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 w-fit">
+      <div className={`relative z-10 h-full flex flex-col justify-center px-10 md:px-24 max-w-2xl transition-all duration-500 ${animating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
+        <span className="inline-block bg-white/90 text-gray-900 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 w-fit shadow">
           {slide.badge}
         </span>
         <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
           {slide.title}
         </h1>
-        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-xl font-medium">
+        <p className="text-lg md:text-xl text-white/90 mb-8 font-medium">
           {slide.subtitle}
         </p>
         <Link
           to={slide.link}
-          className="inline-block bg-white text-blue-900 font-bold text-lg px-8 py-3 rounded-full hover:bg-blue-50 transition-all duration-200 shadow-xl w-fit hover:scale-105"
+          className="inline-block bg-white text-gray-900 font-bold text-lg px-8 py-3 rounded-full hover:bg-yellow-300 transition-all duration-200 shadow-xl w-fit hover:scale-105"
         >
           {slide.cta} →
         </Link>
@@ -94,7 +90,7 @@ const Hero = () => {
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`transition-all duration-300 rounded-full ${i === current ? 'w-8 h-3 bg-white' : 'w-3 h-3 bg-white/40'}`}
+            className={`transition-all duration-300 rounded-full ${i === current ? 'w-8 h-3 bg-white' : 'w-3 h-3 bg-white/40 hover:bg-white/60'}`}
           />
         ))}
       </div>
@@ -102,13 +98,13 @@ const Hero = () => {
       {/* Arrow buttons */}
       <button
         onClick={() => goTo((current - 1 + slides.length) % slides.length)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl backdrop-blur-sm transition"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/60 text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl backdrop-blur-sm transition"
       >
         ‹
       </button>
       <button
         onClick={() => goTo((current + 1) % slides.length)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/20 hover:bg-white/40 text-white rounded-full w-12 h-12 flex items-center justify-center text-xl backdrop-blur-sm transition"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/60 text-white rounded-full w-12 h-12 flex items-center justify-center text-2xl backdrop-blur-sm transition"
       >
         ›
       </button>
@@ -117,3 +113,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
