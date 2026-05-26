@@ -8,8 +8,9 @@ const slides = [
     cta: "Shop Electronics",
     link: "/category/electronics",
     bg: "from-blue-900 via-blue-900/50 to-transparent",
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c028b?w=1920&h=800&fit=crop&crop=faces&q=80",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1920&q=80",
     badge: "Limited Time",
+    position: "center 25%",
   },
   {
     title: "New Fashion Arrivals",
@@ -17,8 +18,9 @@ const slides = [
     cta: "Shop Fashion",
     link: "/category/women",
     bg: "from-pink-900 via-pink-900/50 to-transparent",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1920&h=800&fit=crop&crop=faces&q=80",
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1920&q=80",
     badge: "New In",
+    position: "center 30%",
   },
   {
     title: "Home & Furniture",
@@ -26,8 +28,9 @@ const slides = [
     cta: "Shop Furniture",
     link: "/category/furniture",
     bg: "from-orange-900 via-orange-900/50 to-transparent",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1920&h=800&fit=crop&crop=faces&q=80",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1920&q=80",
     badge: "Save Big",
+    position: "center 20%",
   },
 ];
 
@@ -60,7 +63,7 @@ const Hero = () => {
         style={{
           backgroundImage: `url(${slide.image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: slide.position || 'center',
         }}
       />
       {/* Gradient overlay */}
