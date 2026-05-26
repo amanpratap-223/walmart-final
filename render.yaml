@@ -4,8 +4,8 @@ services:
     name: walmart-main
     env: node
     plan: free
-    buildCommand: "npm run build"
-    startCommand: "npm start"
+    buildCommand: "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend"
+    startCommand: "node backend/server.js"
     envVars:
       - key: NODE_VERSION
         value: "20"
