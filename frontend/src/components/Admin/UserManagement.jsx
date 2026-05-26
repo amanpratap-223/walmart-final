@@ -59,6 +59,7 @@ const UserManagement = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            autoComplete="new-password"
             required
             className="w-full border border-gray-300 rounded p-2"
           />
@@ -70,6 +71,7 @@ const UserManagement = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            autoComplete="new-password"
             required
             className="w-full border border-gray-300 rounded p-2"
           />
