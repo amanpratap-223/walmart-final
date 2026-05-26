@@ -218,6 +218,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("customer");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -226,7 +227,7 @@ const Register = () => {
       const res = await fetch("/api/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, role }),
       });
       const data = await res.json();
       if (res.ok) {
@@ -269,6 +270,18 @@ const Register = () => {
             <label className='block text-sm font-semibold mb-2'>Password</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
               className='w-full p-2 border rounded' placeholder='Enter your password' required />
+          </div>
+
+          <div className='mb-6'>
+            <label className='block text-sm font-semibold mb-2'>Account Type</label>
+            <select 
+              value={role} 
+              onChange={(e) => setRole(e.target.value)}
+              className='w-full p-2 border rounded bg-white'
+            >
+              <option value="customer">Customer</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
 
           <button type="submit" className="w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition">

@@ -5,12 +5,12 @@ const { protect } = require("../middleware/authMiddleware");
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
     try {
         let user = await User.findOne({ email });
         if (user) return res.status(400).json({ message: "User already exists" });
 
-        user = new User({ name, email, password });
+        user = new User({ name, email, password, role: role || "customer" });
         await user.save();
 
         const payload = { user: { id: user._id, role: user.role } };
