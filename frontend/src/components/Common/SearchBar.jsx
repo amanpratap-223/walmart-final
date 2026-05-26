@@ -42,7 +42,7 @@ export default function SearchBar({ isOpen, onClose }) {
   const doSearch = async (q) => {
     try {
       const res = await fetch(
-        `http://localhost:9000/api/products/search?q=${encodeURIComponent(q)}`
+        `/api/products/search?q=${encodeURIComponent(q)}`
       );
       const results = await res.json();
       if (results.length === 1) {

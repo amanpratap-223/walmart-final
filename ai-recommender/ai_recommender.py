@@ -3,7 +3,7 @@ from flask_cors import CORS                        # ← 1) import
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
-import requests, threading, time
+import requests, threading, time, os
 
 app = Flask(__name__)
 CORS(app)                                          # ← 2) enable
@@ -13,7 +13,8 @@ model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def fetch_catalog():
     try:
-        resp = requests.get("http://localhost:9000/api/products/titles")
+        api_url = os.environ.get("MAIN_API_URL", "http://localhost:9000")
+        resp = requests.get(f"{api_url}/api/products/titles")
         return resp.json()['titles']
     except Exception as e:
         print("⚠️ fetch_catalog failed:", e)
@@ -53,4 +54,5 @@ def recommend():
     return jsonify(out)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port)

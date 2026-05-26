@@ -184,7 +184,7 @@ export default function ProductDetail() {
   const isClothing = clothingCats.includes(product?.category);
 
   useEffect(() => {
-    fetch(`http://localhost:9000/api/products/${id}`)
+    fetch(`/api/products/${id}`)
       .then(r => r.json())
       .then(data => {
         setProduct(data);

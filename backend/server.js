@@ -9,10 +9,7 @@ const connectDB = require('./config/db'); // or './connectDB' if that's your fil
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes'); 
 const orderRoutes   = require('./routes/orderRoutes');
-
-
-
-
+const path = require('path');
 
 
 
@@ -25,8 +22,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-app.use(cors({ origin: 'http://localhost:5173' }));
+const allowedOrigin = process.env.FRONTEND_URL || '*';
+app.use(cors({ origin: allowedOrigin }));
 
 
 
@@ -39,10 +36,17 @@ app.use('/api/orders', orderRoutes);
 
 
 
-// Optional: Basic health check endpoint
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
+// Serve frontend
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running...');
+  });
+}
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
