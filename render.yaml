@@ -1,0 +1,39 @@
+services:
+  # 1. Main Web Service (Node.js + React)
+  - type: web
+    name: walmart-main
+    env: node
+    buildCommand: "cd frontend && npm install && npm run build && cd ../backend && npm install"
+    startCommand: "cd backend && node server.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false # You will provide this in the Render Dashboard
+      - key: OPENAI_API_KEY
+        sync: false # You will provide this in the Render Dashboard
+      - key: JWT_SECRET
+        sync: false # You will provide this in the Render Dashboard
+
+  # 2. AI Recommender (Python)
+  - type: web
+    name: walmart-ai-recommender
+    env: python
+    buildCommand: "cd ai-recommender && pip install -r requirements.txt"
+    startCommand: "cd ai-recommender && gunicorn ai_recommender:app"
+    envVars:
+      - key: MAIN_API_URL
+        fromService:
+          type: web
+          name: walmart-main
+          envVarKey: RENDER_EXTERNAL_URL
+
+  # 3. AI Search Engine (Python)
+  - type: web
+    name: walmart-ai-search
+    env: python
+    buildCommand: "cd ai-search-engine-flask && pip install -r requirements.txt"
+    startCommand: "cd ai-search-engine-flask && gunicorn app:app"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
