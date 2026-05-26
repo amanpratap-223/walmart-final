@@ -4,7 +4,7 @@ services:
     name: walmart-main
     env: node
     plan: free
-    buildCommand: "npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend"
+    buildCommand: "chmod +x build.sh && bash build.sh"
     startCommand: "node backend/server.js"
     envVars:
       - key: NODE_VERSION
