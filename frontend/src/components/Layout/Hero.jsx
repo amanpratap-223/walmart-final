@@ -7,8 +7,8 @@ const slides = [
     subtitle: "Up to 60% off on Electronics",
     cta: "Shop Electronics",
     link: "/category/electronics",
-    gradient: "from-indigo-900 via-indigo-900/80 to-indigo-900/20",
-    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&h=700&fit=crop&crop=top&q=80",
+    gradient: "from-black/80 via-black/50 to-transparent",
+    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&h=900&fit=crop&q=80",
     badge: "Limited Time",
   },
   {
@@ -16,8 +16,8 @@ const slides = [
     subtitle: "Discover the latest trends for Men & Women",
     cta: "Shop Fashion",
     link: "/category/women",
-    gradient: "from-rose-900 via-rose-900/80 to-rose-900/20",
-    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1400&h=700&fit=crop&crop=top&q=80",
+    gradient: "from-black/80 via-black/50 to-transparent",
+    image: "https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=1920&h=900&fit=crop&q=80",
     badge: "New In",
   },
   {
@@ -25,11 +25,12 @@ const slides = [
     subtitle: "Shop what everyone is talking about",
     cta: "Shop Trending",
     link: "/category/trending",
-    gradient: "from-violet-900 via-violet-900/80 to-violet-900/20",
-    image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=1400&h=700&fit=crop&crop=top&q=80",
+    gradient: "from-black/80 via-black/50 to-transparent",
+    image: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1920&h=900&fit=crop&q=80",
     badge: "Hot 🔥",
   },
 ];
+
 
 const Hero = () => {
   const [current, setCurrent] = useState(0);
