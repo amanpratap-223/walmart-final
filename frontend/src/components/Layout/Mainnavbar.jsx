@@ -179,6 +179,8 @@ export default function MainNavbar() {
   const { cartProducts } = useCart();
   const totalItems = cartProducts.reduce((sum, i) => sum + i.quantity, 0);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <>
       {/* Regular navbar */}
@@ -202,13 +204,13 @@ export default function MainNavbar() {
 
             {/* desktop icons */}
             <div className="hidden md:flex items-center space-x-6">
-              <Link to="/admin" className="px-2 py-1 bg-black text-white rounded text-sm">
+              <Link to="/admin" className="px-2 py-1 bg-black text-white rounded text-sm font-semibold">
                 Admin
               </Link>
               <button onClick={() => setIsSearchOpen(true)}>
                 <HiMagnifyingGlass size={24} className="text-gray-800" />
               </button>
-              <Link to="/login">
+              <Link to={user ? "/profile" : "/login"}>
                 <HiOutlineUser size={24} className="text-gray-800" />
               </Link>
               <Link to="/wishlist" className="flex items-center space-x-1">
@@ -253,13 +255,16 @@ export default function MainNavbar() {
                 </Link>
               ))}
               <div className="flex space-x-6 pt-4 border-t">
+                <Link to="/admin" className="px-2 py-1 bg-black text-white rounded text-sm font-semibold flex items-center justify-center" onClick={() => setMobileMenuOpen(false)}>
+                  Admin
+                </Link>
                 <button onClick={() => setIsSearchOpen(true)}>
                   <HiMagnifyingGlass size={24} className="text-gray-800" />
                 </button>
-                <Link to="/login">
+                <Link to={user ? "/profile" : "/login"} onClick={() => setMobileMenuOpen(false)}>
                   <HiOutlineUser size={24} className="text-gray-800" />
                 </Link>
-                <Link to="/wishlist">
+                <Link to="/wishlist" onClick={() => setMobileMenuOpen(false)}>
                   <HiOutlineHeart size={24} className="text-gray-800" />
                 </Link>
                 <button onClick={() => setDrawerOpen(o => !o)} className="relative">

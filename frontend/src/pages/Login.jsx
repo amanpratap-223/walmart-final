@@ -1,21 +1,37 @@
 
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const storedUser = JSON.parse(localStorage.getItem("registeredUser"));
-
-    if (storedUser && storedUser.email === email && storedUser.password === password) {
-      console.log("User Login:", { email, password });
-      alert("Login successful!");
-    } else {
-      alert("Invalid credentials. Please check or register first.");
+    try {
+      const res = await fetch("/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        alert("Login successful!");
+        if (data.user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      } else {
+        alert(data.message || "Invalid credentials.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong during login.");
     }
   };
 
@@ -44,6 +60,15 @@ const Login = () => {
           <button type="submit" className="w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800 transition">
             Sign In
           </button>
+
+          <div className="flex space-x-2 mt-4">
+            <button type="button" onClick={() => {setEmail("admin@example.com"); setPassword("admin123");}} className="w-1/2 bg-gray-200 text-black text-sm font-medium p-2 rounded hover:bg-gray-300 transition">
+              Admin Fill
+            </button>
+            <button type="button" onClick={() => {setEmail("customer@example.com"); setPassword("customer123");}} className="w-1/2 bg-gray-200 text-black text-sm font-medium p-2 rounded hover:bg-gray-300 transition">
+              Customer Fill
+            </button>
+          </div>
 
           <p className='mt-6 text-center text-sm'>
             Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Register</Link>

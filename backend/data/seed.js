@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Product = require('../models/Product');
 const products = require('./products');
-const User = require('./models/User');
-const Cart = require('./models/Cart');
+const User = require('../models/User');
+const Cart = require('../models/Cart');
 const users = require('./users'); // You need to create a users.js array similar to products.js
 
 dotenv.config();
@@ -18,7 +18,7 @@ const seedData = async () => {
 
     // Seed Users
     await User.deleteMany();
-    await User.insertMany(users);
+    await User.create(users);
     console.log("✅ Users seeded successfully");
 
     //Seed Cart

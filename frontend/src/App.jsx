@@ -77,7 +77,7 @@ import { WishlistProvider } from './context/WishlistContext';
 import { Toaster }          from 'react-hot-toast';
 
 import Mainnavbar          from './components/Layout/Mainnavbar';
-import ChatbotLoader       from './components/ChatbotLoader';
+import Chatbot             from './components/Chatbot';
 import Home                from './pages/Home';
 import CategoryPage        from './pages/CategoryPage';
 import SearchResults       from './pages/SearchResult';
@@ -135,7 +135,7 @@ function PublicLayout() {
   return (
     <>
       <Mainnavbar />
-      <ChatbotLoader />
+      <Chatbot />
       <Outlet />
     </>
   );

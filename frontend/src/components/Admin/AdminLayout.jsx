@@ -1,15 +1,37 @@
 
 
-import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import AdminSidebar from './AdminSidebar'
 
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const navigate = useNavigate()
+  const [checking, setChecking] = useState(true)
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"))
+    if (!user || user.role !== "admin") {
+      alert("Access Denied: Admin role required. Please log in as Admin.")
+      navigate("/login")
+    } else {
+      setChecking(false)
+    }
+  }, [navigate])
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
+  }
+
+  if (checking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 text-gray-700">
+        <div className="text-center">
+          <p className="text-lg font-medium">Checking authorization...</p>
+        </div>
+      </div>
+    )
   }
 
   return (

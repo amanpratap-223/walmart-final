@@ -212,19 +212,35 @@
 // export default Register;
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = { name, email, password };
-    localStorage.setItem("registeredUser", JSON.stringify(userData));
-    console.log("User Registered:", userData);
-    alert("User registered successfully!");
+    try {
+      const res = await fetch("/api/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        alert("Registration successful!");
+        navigate("/");
+      } else {
+        alert(data.message || "Registration failed.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong during registration.");
+    }
   };
 
   return (
