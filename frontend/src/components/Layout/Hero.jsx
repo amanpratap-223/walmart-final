@@ -7,8 +7,8 @@ const slides = [
     subtitle: "Up to 60% off on Electronics",
     cta: "Shop Electronics",
     link: "/category/electronics",
-    bg: "from-blue-900/90 to-blue-900/10",
-    image: "https://images.unsplash.com/photo-1529139574466-a303027c028b?w=1200&auto=format&fit=crop&q=80",
+    bg: "from-blue-900 via-blue-900/50 to-transparent",
+    image: "https://images.unsplash.com/photo-1529139574466-a303027c028b?w=1920&h=800&fit=crop&crop=faces&q=80",
     badge: "Limited Time",
   },
   {
@@ -16,8 +16,8 @@ const slides = [
     subtitle: "Discover the latest trends for Men & Women",
     cta: "Shop Fashion",
     link: "/category/women",
-    bg: "from-pink-900/90 to-pink-900/10",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&auto=format&fit=crop&q=80",
+    bg: "from-pink-900 via-pink-900/50 to-transparent",
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1920&h=800&fit=crop&crop=faces&q=80",
     badge: "New In",
   },
   {
@@ -25,8 +25,8 @@ const slides = [
     subtitle: "Transform your living space for less",
     cta: "Shop Furniture",
     link: "/category/furniture",
-    bg: "from-orange-900/90 to-orange-900/10",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1200&auto=format&fit=crop&q=80",
+    bg: "from-orange-900 via-orange-900/50 to-transparent",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1920&h=800&fit=crop&crop=faces&q=80",
     badge: "Save Big",
   },
 ];
